@@ -1,12 +1,10 @@
-import sqlite3
 import pandas as pd
+from src.database import get_connection
 from src.pytorch_integration import PyTorchIntegration
 
 class ModelLineage:
-    def __init__(self, db='model_lineage.db'):
-        self.db = db
-        self.conn = sqlite3.connect(db)
-        self.cursor = self.conn.cursor()
+    def __init__(self, backend='sqlite', **config):
+        self.conn, self.cursor = get_connection(backend, **config)
 
     def log_model_metadata(self, model_name, model_version):
         self.cursor.execute('CREATE TABLE IF NOT EXISTS model_metadata (model_name TEXT, model_version TEXT)')
