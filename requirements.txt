@@ -1,3 +1,5 @@
 sqlite3
 pandas
 numpy
+torch
+mysql-connector-python
